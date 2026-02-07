@@ -1,0 +1,15 @@
+import random
+
+# Tiny training data
+train = {"DET":["the","a"], "NOUN":["cat","dog","mat"], "VERB":["sat","runs"], "PREP":["on"]}
+
+def tag(sentence):
+    result=[]
+    for w in sentence.split():
+        # pick tag with probability proportional to word match
+        candidates=[t for t,ws in train.items() if w in ws]
+        tag = random.choice(candidates) if candidates else "UNK"
+        result.append((w,tag))
+    return result
+
+print(tag("the dog sat on the mat"))
